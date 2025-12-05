@@ -1,25 +1,25 @@
-var num1 = 1;
-var num2 = 1;
-var operator = "";
+var num1 = 10;
+var num2 = 2;
+var operator = "+";
 
-var test = operate(10,"/",2);
+var test = operate(num1,operator,num2);
 console.log(test);
 
-function operate(num1,operator,num2) {
+function operate(x,operator,y) {
     let answer = 1;
     
     switch(operator) {
         case "+":
-            answer = add(num1,num2);
+            answer = add(x,y);
             break;
         case "-":
-            answer = subtract(num1,num2);
+            answer = subtract(x,y);
             break;
         case "*":
-            answer = multiply(num1,num2);
+            answer = multiply(x,y);
             break;
         case "/":
-            answer = divide(num1,num2);
+            answer = divide(x,y);
             break;
     }
 
