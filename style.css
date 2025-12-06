@@ -49,6 +49,10 @@
     background-color: orange;
 }
 
+#clear-sign {
+    background-color: red;
+}
+
 .button {
     border: solid black 1px;
     display: flex;
