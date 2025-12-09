@@ -7,7 +7,7 @@ const displayText = document.getElementById("display");
 
 for (const button of buttons) {
   button.addEventListener("click", function () {
-    updateDisplay(button);
+      updateDisplay(button);
   });
 }
 
