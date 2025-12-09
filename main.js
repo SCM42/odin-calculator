@@ -7,14 +7,16 @@ const displayText = document.getElementById("display");
 
 for (const button of buttons) {
   button.addEventListener("click", function () {
-    if (button.id === "clear-sign") {
-      num1 = "";
-    } else {
-      num1 += button.textContent.trim();
-    }
-
-    displayText.textContent = num1;
+    updateDisplay(button);
   });
+}
+
+function updateDisplay(button) {
+  if (button.id === "clear-sign") {
+      displayText.textContent = "";
+    } else {
+      displayText.textContent += button.textContent.trim();
+    }
 }
 
 //#region
