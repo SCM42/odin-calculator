@@ -3,57 +3,63 @@ let num2 = "";
 let operator = "";
 
 let calcArr = [];
+let operationStored = false;
 
 const buttons = document.querySelectorAll(".button");
 const displayText = document.getElementById("display");
 
 for (const button of buttons) {
   button.addEventListener("click", function () {
-    checkForOperation(button);
     updateDisplay(button);
+    checkForOperation(button);
   });
 }
 
-function checkForOperation(button) { 
+function checkForOperation(button) {
+  let answer = "";
+  
+  if (button.id === "equal-sign") {
+    answer = assignValuesThenOperate();
+
+    displayText.textContent = answer;
+  }
+  
   if (button.classList.contains("operator")) {
-    //console.log(`Operator selected: "${button.textContent.trim()}"`);
-
     if (calcArr.length === 2) {
-      num1 = parseInt(calcArr.shift());
-      operator = calcArr.shift();
-      num2 = parseInt(getSecondNumber());
+      answer = assignValuesThenOperate();
 
-      let answer = operate(num1, operator, num2);
       displayText.textContent = answer;
     }
-    
+
     calcArr.push(displayText.textContent.trim());
     calcArr.push(button.textContent.trim());
 
-    //console.log(calcArr);
+    operationStored = true;
   }
 }
 
-function getSecondNumber() {
-  let displayArr = displayText.textContent.trim().split("");
-  let operatorIndex = displayArr.findIndex((char) => char === operator);
-  let secondNumber = "";
+function assignValuesThenOperate() {
+  num1 = parseInt(calcArr.shift());
+  operator = calcArr.shift();
+  num2 = parseInt(displayText.textContent.trim());
 
-  //console.log(`Operator index is: ${operatorIndex}`);
-  //console.log(`Temporary array is ${displayArr}`);
+  let answer = operate(num1, operator, num2);
 
-  for (i = operatorIndex + 1; i < displayArr.length; i++) {
-    secondNumber += displayArr[i];
-  }
-
-  return secondNumber;
+  return answer;
 }
 
 function updateDisplay(button) {
-  if (button.id === "clear-sign") {
+  if (operationStored === true) {
     displayText.textContent = "";
-  } else {
-    displayText.textContent += button.textContent.trim();
+    operationStored = false;
+  }
+
+  if (!button.classList.contains("operator")) {
+    if (button.id === "clear-sign") {
+      displayText.textContent = "";
+    } else {
+      displayText.textContent += button.textContent.trim();
+    }
   }
 }
 
