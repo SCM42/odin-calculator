@@ -17,13 +17,17 @@ for (const button of buttons) {
 
 function checkForOperation(button) {
   let answer = "";
-  
+
   if (button.id === "equal-sign") {
     answer = assignValuesThenOperate();
 
     displayText.textContent = answer;
   }
-  
+
+  if (button.id === "clear-sign") {
+    calcArr.length = 0;
+  }
+
   if (button.classList.contains("operator")) {
     if (calcArr.length === 2) {
       answer = assignValuesThenOperate();
@@ -36,6 +40,8 @@ function checkForOperation(button) {
 
     operationStored = true;
   }
+
+  console.log(calcArr);
 }
 
 function assignValuesThenOperate() {
@@ -82,7 +88,7 @@ function operate(x, operator, y) {
       break;
   }
 
-  return answer;
+  return Math.round(answer*100) / 100;
 }
 
 function add(x, y) {
